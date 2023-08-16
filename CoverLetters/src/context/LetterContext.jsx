@@ -10,7 +10,7 @@ export const useLetterContext = () => {
 
 // Create a provider component
 export const LetterContextProvider = ({ children }) => {
-  const [letterData, setLetterData] = useState('');
+  const [letterData, setLetterData] = useState('Please fill out the form on the left');
   const [pdfData, setPdfData] = useState({})
 
   const data = {

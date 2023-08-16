@@ -4,12 +4,11 @@ import validatForm from '../util/ValidateForm';
 import Title from '../atoms/Title';
 import CustomButton from '../atoms/Button';
 import { useLetterContext } from '../../context/LetterContext';
-import userInfo from '../../assets/info.json'
 import withAdditionalClass from '../util/withAdditionalClasses';
 
 function InfoForm() {
 
-    const SubmitButton = withAdditionalClass(CustomButton, 'block mx-auto my-auto')
+    const SubmitButton = withAdditionalClass(CustomButton, 'block mx-auto my-auto bg-gray-100 hover:bg-gray-500 hover:text-gray-100')
 
     const datePicker = useRef()
 
@@ -50,7 +49,7 @@ function InfoForm() {
         if(Object.keys(newErrs).length === 0){
             const data = await getData()
             setLetterData(data)
-            setPdfData({name:formInfo.Name, company:formInfo.Company, date:formInfo.Date})
+            setPdfData({name:formInfo.Name, company:formInfo.Company, date:new Date().toLocaleDateString()})
         }else{
             setLetterData(prevLetter)
         }
