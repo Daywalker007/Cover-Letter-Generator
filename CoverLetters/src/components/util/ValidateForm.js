@@ -1,6 +1,4 @@
 export default function validatForm(infoObj) {
-    console.log('Running validation')
-
     const {Name, Email, City, State, Phone, Date, Position, Company, Years, Description} = infoObj
     const errors = {}
 

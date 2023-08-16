@@ -44,8 +44,6 @@ function InfoForm() {
         const newErrs = validatForm(formInfo)
         setErrors(newErrs)
 
-        console.log('Number of errors in from: ', Object.keys(newErrs).length)
-
         if(Object.keys(newErrs).length === 0){
             const data = await getData()
             setLetterData(data)
@@ -57,7 +55,9 @@ function InfoForm() {
     }
 
     const getData = () => {
-        return fetch('https://cover-letter-api.onrender.com/write-letter', { // Enter your IP address here
+        const uri = import.meta.env.BASE_URI || 'http://localhost:5000'
+        console.log('Using base uri: ', uri)
+        return fetch(`${uri}/write-letter`, { // Enter your IP address here
             headers: {
                 "Content-Type": "application/json",
             },

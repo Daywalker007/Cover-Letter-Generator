@@ -1,6 +1,8 @@
 const express = require('express')
 const cors = require('cors')
+const nodemailer = require('nodemailer')
 const bodyParser = require('body-parser');
+const Email = require('./Email.js')
 require('dotenv').config()
 const { Configuration, OpenAIApi } = require("openai")
 
@@ -57,6 +59,37 @@ app.post('/write-letter', async (req,res) => {
             error: err.response ? err.response.data : 'There was an issue on the server'
         })
     }
+})
+
+app.post("/sendContactForm", async (request, response) => {  
+    const { Name, Subject, Message} = request.body
+
+    const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth:{
+            user:'rmitchell@getmegiddy.com',
+            pass:'xwszrsahcmmeyvez'
+        }
+    })
+
+    const emailHtml = Email(Name, Message);
+
+    const options = {
+        from:request.body.Email,
+        to:'reggie266@gmail.com',
+        subject:Subject,
+        text:emailHtml
+    }
+
+    transporter.sendMail(options, (err, info) => {
+        if(err){
+            console.error(err)
+            return
+        }
+
+        console.log('Sent mail: ', info.response)
+    })
+
 })
 
 const port = process.env.PORT || 5000
