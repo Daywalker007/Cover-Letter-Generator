@@ -57,7 +57,7 @@ function InfoForm() {
     }
 
     const getData = () => {
-        return fetch('http://localhost:5000/write-letter', { // Enter your IP address here
+        return fetch('https://cover-letter-api.onrender.com/write-letter', { // Enter your IP address here
             headers: {
                 "Content-Type": "application/json",
             },
