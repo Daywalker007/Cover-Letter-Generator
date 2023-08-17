@@ -55,7 +55,7 @@ function InfoForm() {
     }
 
     const getData = () => {
-        const uri = import.meta.env.BASE_URI || 'http://localhost:5000'
+        const uri = import.meta.env.VITE_BASE_URI || 'http://localhost:5000'
         console.log('Using base uri: ', uri)
         return fetch(`${uri}/write-letter`, { // Enter your IP address here
             headers: {
