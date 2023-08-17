@@ -64,11 +64,17 @@ app.post('/write-letter', async (req,res) => {
 app.post("/sendContactForm", async (request, response) => {  
     const { Name, Subject, Message} = request.body
 
+    console.log({
+        fromEmail:process.env.FROM_EMAIL,
+        pass:process.env.EMAIL_PASS,
+        toEmail:process.env.TO_EMAIL,
+    })
+
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth:{
-            user:'rmitchell@getmegiddy.com',
-            pass:'xwszrsahcmmeyvez'
+            user:process.env.FROM_EMAIL,
+            pass:process.env.EMAIL_PASS
         }
     })
 
@@ -76,7 +82,7 @@ app.post("/sendContactForm", async (request, response) => {
 
     const options = {
         from:request.body.Email,
-        to:'reggie266@gmail.com',
+        to:process.env.TO_EMAIL,
         subject:Subject,
         text:emailHtml
     }
@@ -84,10 +90,15 @@ app.post("/sendContactForm", async (request, response) => {
     transporter.sendMail(options, (err, info) => {
         if(err){
             console.error(err)
-            return
-        }
+            return response.json({
+                success: false,
+                data:err
+            })
+        }        
+    })
 
-        console.log('Sent mail: ', info.response)
+    return response.json({
+        success: true
     })
 
 })
