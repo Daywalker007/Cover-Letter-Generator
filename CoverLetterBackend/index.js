@@ -1,8 +1,8 @@
 const express = require('express')
 const cors = require('cors')
+const Email = require('./Email.js')
 const nodemailer = require('nodemailer')
 const bodyParser = require('body-parser');
-const Email = require('./Email.js')
 require('dotenv').config()
 const { Configuration, OpenAIApi } = require("openai")
 
