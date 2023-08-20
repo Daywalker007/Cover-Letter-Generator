@@ -8,7 +8,7 @@ import withAdditionalClass from '../util/withAdditionalClasses';
 
 function InfoForm() {
 
-    const SubmitButton = withAdditionalClass(CustomButton, 'block mx-auto my-auto bg-gray-100 hover:bg-gray-500 hover:text-gray-100')
+    const SubmitButton = withAdditionalClass(CustomButton, 'block mx-auto mt-5 bg-gray-100 hover:bg-gray-500 hover:text-gray-100')
 
     const datePicker = useRef()
 
