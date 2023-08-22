@@ -24,13 +24,19 @@ function InfoForm() {
         Position:'',
         Description:'',
     })
-
+    
     const [errors, setErrors] = useState({})
-    const {letterData, setLetterData, pdfData, setPdfData} = useLetterContext()
+    const {letterData, setLetterData, setPdfData, APP_STATE, appState, setAppState} = useLetterContext()
 
     const handleInput = (e) => {
-        const {name, value} = e.target
-        const newObj = {...formInfo, [name]:value}
+        const {name, value, role, innerText} = e.target
+        let inputVal = value
+        let inputName = name
+        if(role === 'textbox'){
+            inputName = e.target.dataset.name
+            inputVal = innerText
+        }
+        const newObj = {...formInfo, [inputName]:inputVal}
         setFormInfo(newObj)
     }
 
@@ -41,17 +47,20 @@ function InfoForm() {
         const prevLetter = letterData
         setLetterData('')
 
+        console.log('Form Info: ', formInfo)
         const newErrs = validatForm(formInfo)
         setErrors(newErrs)
-
+        
+        setAppState(APP_STATE.Output)
+        
         if(Object.keys(newErrs).length === 0){
             const data = await getData()
             setLetterData(data)
             setPdfData({name:formInfo.Name, company:formInfo.Company, date:new Date().toLocaleDateString()})
         }else{
+            setAppState(APP_STATE.Form)
             setLetterData(prevLetter)
-        }
-        
+        }        
     }
 
     const getData = () => {
@@ -80,8 +89,8 @@ function InfoForm() {
         setFormInfo(newObj)
     }, [])
     return (
-        <aside className='bg-gray-800 w-1/5 h-[95dvh] rounded-lg p-8'>
-            <form onSubmit={handleValidate} method="post" className='h-full'>
+        <aside className={`bg-gray-800 transition-all ${appState === APP_STATE.Form ? 'w-full' : 'w-0'} lg:w-2/5 lg:no-scrollbar h-[95dvh] overflow-scroll rounded-lg`}>
+            <form onSubmit={handleValidate} method="post" className='p-8'>
                 <Title>User Info</Title>
 
                 <div className='space-y-3 mb-10'>
