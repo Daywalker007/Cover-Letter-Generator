@@ -23,7 +23,7 @@ export function InputTextArea({name, id, onChange, err}) {
   return (
     <div>
         <div><label htmlFor={name} className='inline w-fit text-white'>{name}</label><label htmlFor={name} className='ml-3 text-red-500'>{err}</label></div>
-        <span role='textbox' contentEditable id={id && id} name={name} placeholder={name} className='block resize min-h-[40px] max-h-28 overflow-scroll bg-white px-5 rounded w-full shadow shadow-iceTheme-300 dark:shadow-iceTheme-400 text-darkBG' onChange={onChange}></span>
+        <div role='textbox' contentEditable='plaintext-only' id={id && id} data-name={name} placeholder={name} className='block resize min-h-[40px] max-h-28 overflow-scroll bg-white p-5 rounded w-full shadow shadow-iceTheme-300 dark:shadow-iceTheme-400 text-darkBG' onInput={onChange}></div>
     </div>
   )
 }

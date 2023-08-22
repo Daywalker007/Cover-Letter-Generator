@@ -6,13 +6,15 @@ import Skeleton from '../atoms/Skeleton'
 function LoadingOutput() {
     return (
         <>
-            <div type='text' name={'letter-out'} className='p-5 space-y-5 overflow-y-hidden rounded w-full shadow-dark h-[95dvh] bg-white'>
+            <div type='text' name={'letter-out'} className='p-5 space-y-5 overflow-hiddden rounded w-full shadow-dark h-[95dvh] bg-white'>
                 <Skeleton />
                 <Skeleton />
                 <Skeleton />
                 <Skeleton />
-                <Skeleton />
-                <Skeleton />
+                <div className='hidden lg:block'>
+                    <Skeleton />
+                    <Skeleton />
+                </div>
             </div>
         </>
     )

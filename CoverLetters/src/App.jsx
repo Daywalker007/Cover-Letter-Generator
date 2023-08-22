@@ -8,7 +8,7 @@ function App() {
 
   return (
     <LetterContextProvider>
-      <main className='bg-gray-600 flex items-center h-[100dvh] gap-4 p-5'>
+      <main className='bg-gray-600 flex items-center h-[100dvh] lg:gap-4 p-5'>
         <InfoForm />
         <LetterOutput />
       </main>
